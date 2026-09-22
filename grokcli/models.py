@@ -11,16 +11,20 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Dict, FrozenSet, Optional
 
-# Chat / reasoning models (Responses API). Verified against GET /v1/models
-# (2026-09): ``grok-4.6`` is the flagship (500k context, reasoning effort
-# low/medium/high — it rejects ``none`` with HTTP 400). Older ids (grok-4.5,
-# grok-4.3 1M-ctx, grok-build-0.1, grok-4.20-*) still resolve upstream but are
-# kept out of this catalog; ``-m`` passes any id through unvalidated.
-CHAT_MODELS: FrozenSet[str] = frozenset({"grok-4.6"})
+# Chat / reasoning models (Responses API). GA 2026-09-21: ``grok-4.7`` is the
+# flagship (500k context, $2/$6 per M tokens — same price as 4.6; knowledge
+# cutoff May 2026). Reasoning efforts are low/medium/high/xhigh (xhigh is new
+# with 4.7; the docs list it for 4.6 as well). ``none`` is not in the documented
+# set — grok-4.6 rejected it with HTTP 400 live, so expect the same here. Older
+# ids (grok-4.6, grok-4.5, grok-4.3 1M-ctx, grok-build-0.1, grok-4.20-*) still
+# resolve upstream but are kept out of this catalog; ``-m`` passes any id
+# through unvalidated.
+CHAT_MODELS: FrozenSet[str] = frozenset({"grok-4.7"})
 
 # Configurable reasoning effort for chat models (Responses API
-# ``reasoning: {effort}``). ``none`` disables reasoning entirely.
-REASONING_EFFORTS: FrozenSet[str] = frozenset({"none", "low", "medium", "high"})
+# ``reasoning: {effort}``). ``none`` disables reasoning entirely (flagship
+# models reject it); ``xhigh`` added with Grok 4.7 (docs 2026-09-21).
+REASONING_EFFORTS: FrozenSet[str] = frozenset({"none", "low", "medium", "high", "xhigh"})
 
 IMAGE_MODELS: Dict[str, str] = {
     # Imagine Image 2.0 (2026-08-07) — live in the API since 2026-08; the

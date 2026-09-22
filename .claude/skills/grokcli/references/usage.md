@@ -38,7 +38,7 @@ grokcli chat "name 3 colors" --no-stream --output json | jq -r .text
 
 ## 对话与搜索
 
-- 默认模型 `grok-4.6`（旗舰，500k ctx）；`--effort low|medium|high` 调推理强度（4.6 拒绝 `none`，400）。旧 id（4.5/4.3 等）上游仍在，`-m` 直接指定即可。
+- 默认模型 `grok-4.7`（旗舰，2026-09-21 GA，500k ctx，$2/$6 与 4.6 持平）；`--effort low|medium|high|xhigh` 调推理强度（`xhigh` 为 4.7 新增；4.7 拒绝 `none`，400，4.6 已实测）。旧 id（4.6/4.5/4.3 等）上游仍在，`-m` 直接指定即可。
 - 续接会话：`grokcli chat -c "继续"`（本地持久化，消息数/会话数有界）。
 - `search` 答案带内联引用 `[[1]](url)`；引用来源在 stderr 的 Sources 块。
 

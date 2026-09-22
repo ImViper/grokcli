@@ -7,8 +7,9 @@ Request shape (verified against the official Grok CLI and Moore's grok-cli):
      "store": false, "tools"?, "tool_choice"?, "parallel_tool_calls"?,
      "reasoning": {"effort"}?, "service_tier"?}
 
-``reasoning.effort`` (none/low/medium/high) tunes how hard a reasoning model
-thinks before responding; grok-4.6 rejects ``none`` with HTTP 400. ``service_tier: "priority"``
+``reasoning.effort`` (none/low/medium/high/xhigh) tunes how hard a reasoning model
+thinks before responding; grok-4.7 documents low/medium/high/xhigh only (4.6
+rejected ``none`` with HTTP 400; ``xhigh`` is new with 4.7). ``service_tier: "priority"``
 requests priority processing. The response carries an ``output[]`` array;
 assistant text lives in items of type ``message`` under
 ``content[].type == "output_text"``. Streaming arrives as SSE events whose data

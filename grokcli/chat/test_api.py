@@ -131,6 +131,10 @@ class ReasoningEffortAndPriorityTest(unittest.TestCase):
     def test_effort_adds_reasoning_object(self):
         self.assertEqual(self._payload(effort="medium")["reasoning"], {"effort": "medium"})
 
+    def test_xhigh_effort_accepted(self):
+        """``xhigh`` (new with Grok 4.7) passes through to the reasoning object."""
+        self.assertEqual(self._payload(effort="xhigh")["reasoning"], {"effort": "xhigh"})
+
     def test_no_effort_sends_no_reasoning(self):
         self.assertNotIn("reasoning", self._payload())
 
